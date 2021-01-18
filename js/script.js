@@ -25,8 +25,8 @@ let products = [
         incart:00
     },
     {
-        name: "Dark Grey Hoodie",
-        tag:"darkgrey",
+        name: "Black Hoodie",
+        tag:"yellowinside",
         price:30,
         incart:0,
     },
@@ -43,8 +43,8 @@ let products = [
         incart:0
     },
     {
-        name:"light black Hoodie",
-        tag:"lightblack",
+        name:"Dark grey Hoodie",
+        tag:"Darkgrey",
         price:30,
         incart:0
     },
@@ -78,7 +78,7 @@ function onLoadCartNumbers(){
 };
 
 function cartNumbers(product){
-    console.log(product)
+    // console.log(product)
     let productNumbers = parseInt(localStorage.getItem("cartNumbers"));
     
     if(productNumbers){
@@ -88,6 +88,16 @@ function cartNumbers(product){
         localStorage.setItem('cartNumbers',1);
         document.querySelector(".cart span").textContent = 1;
     }
-    
+
+    setItems(product) ;
 };
+
+function setItems(product){
+    let cartItems = {
+        [product.tag]:product
+    }
+    product.incart = 1;
+    localStorage.setItem("productInCart",JSON.stringify(cartItems));
+
+}
 onLoadCartNumbers()
