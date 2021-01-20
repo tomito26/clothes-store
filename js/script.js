@@ -4,61 +4,61 @@ let products = [
         name:"White Hoodie",
         tag:"whitehoodie",
         price:30,
-        incart:0
+        inCart:0
     },
     {
         name:"Black hoodie",
         tag:"blackhoodie",
         price:30,
-        incart:0
+        inCart:0
     },
     {
         name: "Grey Hoodie",
         tag:"greyhoodie",
         price:35,
-        incart:0,
+        inCart:0,
     },
     {
         name:"Designer Hoodie",
         tag:"designerhoodie",
-        price: 5,
-        incart:00
+        price: 50,
+        inCart:00
     },
     {
         name: "Black Hoodie",
-        tag:"yellowinside",
+        tag:"blackyellow",
         price:30,
-        incart:0,
+        inCart:0,
     },
     {
         name:"Pink Designer Hoodie",
         tag:"pinkhoodie",
         price:50,
-        incart:0,
+        inCart:0,
     },
     {
         name:"Black Designer Hoodie",
         tag:"blackdesigner",
         price:50,
-        incart:0
+        inCart:0
     },
     {
         name:"Dark grey Hoodie",
-        tag:"Darkgrey",
+        tag:"darkgrey",
         price:30,
-        incart:0
+        inCart:0
     },
     {
         name:"Red Eagle Designer Hoodie",
         tag:"redeagle",
         price:50,
-        incart:0
+        inCart:0
     },
     {
         name:"Colored Designer Hoodie",
-        tag:"coloredHoodie",
+        tag:"coloredhoodie",
         price:50,
-        incart:0
+        inCart:0
     },
 
 ];
@@ -66,6 +66,7 @@ let products = [
 for(let i = 0;i < carts.length;i++){
     carts[i].addEventListener("click",()=>{
         cartNumbers(products[i]);
+        totalCost(products[i])
     })
 };
 
@@ -88,16 +89,63 @@ function cartNumbers(product){
         localStorage.setItem('cartNumbers',1);
         document.querySelector(".cart span").textContent = 1;
     }
-
-    setItems(product) ;
+ 
+    setItems(product);
 };
 
 function setItems(product){
-    let cartItems = {
-        [product.tag]:product
+    let cartItems = localStorage.getItem("productsInCart");
+    cartItems = JSON.parse(cartItems)
+    
+    if(cartItems != null){
+        if (cartItems[product.tag] == undefined){
+            cartItems = {
+                ...cartItems,
+                [product.tag]:product
+            }
+        }
+        cartItems[product.tag].inCart += 1;
+    }else{
+          product.inCart = 1;
+          cartItems = {
+            [product.tag]: product
+          };
     }
-    product.incart = 1;
-    localStorage.setItem("productInCart",JSON.stringify(cartItems));
+    localStorage.setItem("productsInCart",JSON.stringify(cartItems));
 
 }
-onLoadCartNumbers()
+function totalCost(product){
+    let cartCost = localStorage.getItem('totalCost');
+    
+    if(cartCost != null){
+        cartCost = parseInt(cartCost)
+        localStorage.setItem("totalCost",cartCost + product.price);
+    }else{
+        localStorage.setItem("totalCost", product.price);
+    }
+};
+
+function displayCart(){
+    let cartItems = localStorage.getItem("productsInCart");
+    cartItems = JSON.parse(cartItems)
+    let productContainer = document.querySelector(".products-container")
+    
+
+    if(cartItems && productContainer){
+        productContainer.innerHTML = '';
+        Object.values(cartItems).map(item=>{
+            productContainer.innerHTML += `
+            <div class="product>
+                <ion-icon name="close-circle-sharp"></ion-icon>
+                <img src="assets/${item.tag}.jpeg">
+                <span>${item.name}</span> 
+            </div>
+            `;
+        })
+    }
+};
+
+
+
+onLoadCartNumbers();
+displayCart();
