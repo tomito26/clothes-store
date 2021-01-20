@@ -111,13 +111,20 @@ li a{
     padding: 10px;
     text-decoration: none;
 }
-/* --------------------cart-page */
+/* --------------------cart-page--------------------- */
 .products-container{
     max-width: 650px;
     /* display: flex; */
     justify-content: space-around;
     margin: 0 auto;
     margin-top:50px;
+}
+.products ion-icon{
+    font-size: 25px;
+    color: blue;
+    margin-left: 10;
+    margin-right: 10px;
+    cursor: pointer;
 }
 .product-header{
     width: 100%;
@@ -134,13 +141,14 @@ li a{
 }
 .price{
     width: 15%;
-   
+    border-bottom: 1px solid lightgrey;
     display: flex;
     align-items: center;
 }
 .total{
     width: 10%;
     display: flex;
+    border-bottom: 1px solid lightgrey;
     align-items: center;
 }
 .product {
@@ -151,9 +159,30 @@ li a{
     padding: 10px 0;
     border-bottom: 1px solid lightgrey;
 }
+.products{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.products img {
+    width: 75px;
+}
 .quantity{
     width: 30%;
-   
+    border-bottom: 1px solid lightgrey;
     display: flex;
     align-items: center;
+}
+.basketTotalContainer{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 10px 0;
+}
+.basketTotalTitle{
+    width: 30%;
+}
+.basketTotal{
+    width: 10%;
 }
