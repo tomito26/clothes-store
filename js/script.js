@@ -49,7 +49,7 @@ let products = [
         inCart:0
     },
     {
-        name:"Red Eagle Designer Hoodie",
+        name:"Red Hoodie",
         tag:"redeagle",
         price:50,
         inCart:0
